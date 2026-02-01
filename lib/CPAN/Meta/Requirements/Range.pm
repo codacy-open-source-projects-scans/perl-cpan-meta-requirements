@@ -4,7 +4,7 @@ use warnings;
 package CPAN::Meta::Requirements::Range;
 # ABSTRACT: a set of version requirements for a CPAN dist
 
-our $VERSION = '2.145';
+our $VERSION = '2.146';
 
 use Carp ();
 
@@ -456,7 +456,7 @@ sub as_string {
   my @parts = @{ $self->as_struct };
 
   return $parts[0][1] if @parts == 1 and $parts[0][0] eq '>=';
-  @parts = grep { $_->[0] ne '>=' || $_->[1] != 0 } @parts;
+  @parts = grep { $_->[0] ne '>=' || $_->[1] ne '0' } @parts;
 
   return join q{, }, map {; join q{ }, @$_ } @parts;
 }
